@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-Version="0.2.2"
+Version="0.2.3"
 Etc_Path="/etc/powermoder"
 Powermoder_Extra_Flag=${Powermoder_Extra_Flag:-1}
 function echo_help(){
@@ -13,7 +13,7 @@ usage:
     power-profiles-daemon
     ppd ( =power-profiles-daemon )
     tuned
-    config ( use all power manager in $Etc_Path/<profile name>/manager.conf  )
+    config ( =profile ) ( use all power manager in $Etc_Path/<profile name>/manager.conf  )
 <profile name> is under $Etc_Path
 Version: $Version
 EOF
@@ -80,7 +80,7 @@ case $1 in
             echo "no tuned.sh found in profile $2"
         fi
     ;;
-    config)
+    config|profile)
         export Powermoder_Extra_Flag=0
         pre_run $2
         source "$Etc_Path"'/'"$2"/manager.conf
